@@ -1,7 +1,9 @@
+const { UserModel } = require("../models/UserModel");
+
 class ProtectedController {
   static showProtectedPage(req, res) {
     try {
-      if (req.user) {
+      if (UserModel.getUserByEmail) {
         res.render("protected");
       } else {
         res.render("login", {

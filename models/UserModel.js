@@ -60,14 +60,14 @@ class UserModel {
     }
   }
 
-  static async getUserByEmail(email, password) {
+  static async getUserByEmail(email) {
     try {
       const query = `
         SELECT *
         FROM regist_data
-        WHERE email = $1 AND password = $2
+        WHERE email = $1
       `;
-      const values = [email, password];
+      const values = [email];
 
       const result = await postgresqlDb.Client.query(query, values);
       return result.rows[0];
@@ -76,14 +76,14 @@ class UserModel {
     }
   }
 
-  static async comparePassword(password, hashedPassword) {
-    try {
-      const match = await bcrypt.compare(password, hashedPassword);
-      return match;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // static async comparePassword(password, hashedPassword) {
+  //   try {
+  //     const match = await bcrypt.compare(password, hashedPassword);
+  //     return match;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }
 
 module.exports = { UserModel };

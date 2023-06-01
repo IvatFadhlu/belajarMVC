@@ -1,6 +1,7 @@
 const express = require("express");
 const { CustomerController } = require("./controllers/CustomerController");
 const { LoginController } = require("./controllers/LoginController");
+const { LogoutController } = require("./controllers/LogoutController");
 const { DaftarController } = require("./controllers/DaftarController");
 //====stackabuse
 const { RegisterController } = require("./controllers/RegisterController");
@@ -39,19 +40,18 @@ app.get("/", (req, res) => {
 // Rute untuk halaman login
 app.get("/login", LoginController.showLoginForm);
 app.post("/login", LoginController.processLogin);
-// app.post("/login", LoginController.postDataLogin);
 
 // Rute untuk halaman daftar
-app.get("/daftar", DaftarController.showDaftarForm);
-app.post("/daftar", DaftarController.postDataUsers);
-
-//===================daftar method stack abuse + auth token
 app.get("/register", RegisterController.showRegisterForm);
 app.post("/register", RegisterController.postDataRegister);
 
 app.get("/protected", ProtectedController.showProtectedPage);
 
+app.get("/logout", LogoutController.showHomePage);
+
 // contoh get data dari mas gif
+app.get("/daftar", DaftarController.showDaftarForm);
+app.post("/daftar", DaftarController.postDataUsers);
 app.get("/customer", CustomerController.getAllDataCustomer);
 
 app.listen(process.env.PORT, () => {
